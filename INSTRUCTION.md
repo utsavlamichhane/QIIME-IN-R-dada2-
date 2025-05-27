@@ -105,7 +105,7 @@ fnRs <- sort(list.files(path, pattern="_R2_001.fastq.gz", full.names=TRUE))
 And, lets make the sample names as an R object using the following code: 
 
 ```r
-sample.names <- sapply(strsplit(basename(fnFs), "_"), `[`, 1)
+sample.names <- sapply(strsplit(basename(fnFs), "_"), function(x) paste(x[1], x[2], sep="_"))
 ```
 
 Now, the real deal to look if your code is actually doing what you intend to do.
