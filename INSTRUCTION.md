@@ -160,5 +160,91 @@ Few things about the parametes used here;
 - compress=TRUE, means it will zip the file.
 - multithread=TRUE, parallel processing we all know.
 
+Lets see how the filter worked using the following command:
 
-  
+```r
+head(out)
+```
+
+There are so many things we can do but lets keep things simple.
+
+# Step 7: Learn Error Rates
+
+Whats error rate ?
+
+In simple mathematical term:
+
+Error rate = (number of mistakes) ÷ (number of opportunities)
+
+If at quality score 20 you saw 10,000 bases, and 100 of them were actually wrong, your observed error rate is 100 / 10 000 = 0.01 (1%).
+
+lets get the error rate and plot it with the following code:
+
+```r
+errF <- learnErrors(filtFs, multithread=TRUE)
+errR <- learnErrors(filtRs, multithread=TRUE)
+
+###plotting
+plotErrors(errF, nominalQ=TRUE)
+plotErrors(errR, nominalQ=TRUE)
+```
+
+# Step 7: Dereplication
+
+What is derep then ?
+
+whenever we us dada2, it does two very important things:
+
+- Keeps one copy of each unique sequence
+- Counts how many times that exact sequence occurred
+
+So instead of storing 10,000 identical “ACGT….” reads, you store one “ACGT….” entry plus a count of 10,000.
+
+ok, lets keep moving and do the actual dereplication with the following command: 
+
+```r
+derepFs <- derepFastq(filtFs, verbose=TRUE)
+derepRs <- derepFastq(filtRs, verbose=TRUE)
+names(derepFs) <- sample.names
+names(derepRs) <- sample.names
+```
+# Step 8: infering from the samples 
+
+In simple words, it is the step where DADA2 examines your filtered reads and “figures out” which unique sequences are genuine biological variants and which are just noise.
+
+What I mean is the result is, for each sample, a clean list of exact sequence variants (ASVs) with their abundances, ready for merging forward + reverse reads and downstream analysis.
+
+Nothing fancy just checking unique things in our object (dada2 object) from dada2 just like in qiime2. 
+
+Run the following code for the sample inference:
+
+```r
+dadaFs <- dada(derepFs, err=errF, multithread=TRUE)
+dadaRs <- dada(derepRs, err=errR, multithread=TRUE)
+```
+# Step 8: Merge Paired Reads
+
+We do this to get the high-confidence, full-length amplicon sequence variants (ASVs) for each sample, ready to be turned into a sequence table for downstream analysis.
+
+Run the following command to merge the sequences:
+
+```r
+mergers <- mergePairs(dadaFs, derepFs, dadaRs, derepRs, verbose=TRUE)
+```
+
+# Step 9: Make Sequence Table & Remove Chimeras
+
+To create the sequence table as an R object run the following code:
+
+```r
+seqtab <- makeSequenceTable(mergers)
+dim(seqtab)  # samples × variants
+
+seqtab_nochim <- removeBimeraDenovo(seqtab, method="consensus",
+                                    multithread=TRUE, verbose=TRUE)
+```
+
+
+
+
+
