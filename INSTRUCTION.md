@@ -158,6 +158,7 @@ Few things about the parametes used here;
 - truncLen=c(248,239): Here, forward reads are cut at 248 bp, reverse reads at 239 bp.
   Any base beyond that position is discarded.
 - maxN=1: Whenever a sequencer can’t confidently call a base (A, C, G or T) at a given position, it writes an “N” there. That “N” is literally an ambiguous base—meaning “I don’t know what this is.”
+- maxEE = c(2,2): “Keep only reads that are likely to have two or fewer mistakes.” This tends to be much more effective (and less arbitrary) than trimming strictly by quality‐score thresholds alone.
 - truncQ=20, thats the Q score we all know.
 - compress=TRUE, means it will zip the file.
 - multithread=TRUE, parallel processing we all know.
@@ -191,7 +192,7 @@ plotErrors(errF, nominalQ=TRUE)
 plotErrors(errR, nominalQ=TRUE)
 ```
 
-# Step 7: Dereplication
+# Step 8: Dereplication
 
 What is derep then ?
 
@@ -210,7 +211,7 @@ derepRs <- derepFastq(filtRs, verbose=TRUE)
 names(derepFs) <- sample.names
 names(derepRs) <- sample.names
 ```
-# Step 8: infering from the samples 
+# Step 9: infering from the samples 
 
 In simple words, it is the step where DADA2 examines your filtered reads and “figures out” which unique sequences are genuine biological variants and which are just noise.
 
@@ -224,7 +225,7 @@ Run the following code for the sample inference:
 dadaFs <- dada(derepFs, err=errF, multithread=TRUE)
 dadaRs <- dada(derepRs, err=errR, multithread=TRUE)
 ```
-# Step 8: Merge Paired Reads
+# Step 10: Merge Paired Reads
 
 We do this to get the high-confidence, full-length amplicon sequence variants (ASVs) for each sample, ready to be turned into a sequence table for downstream analysis.
 
@@ -234,7 +235,7 @@ Run the following command to merge the sequences:
 mergers <- mergePairs(dadaFs, derepFs, dadaRs, derepRs, verbose=TRUE)
 ```
 
-# Step 9: Make Sequence Table & Remove Chimeras
+# Step 11: Make Sequence Table & Remove Chimeras
 
 To create the sequence table as an R object run the following code:
 
@@ -247,7 +248,7 @@ seqtab_nochim <- removeBimeraDenovo(seqtab, method="consensus",
 ```
 
 
-# Step 10: Track our pipeline
+# Step 12: Track our pipeline
 
 ok, we have been playing a lot with the pipelines lets keep track for our record or for "reviewer 2".
 
@@ -275,7 +276,7 @@ https://outlookuga-my.sharepoint.com/:u:/g/personal/ul54354_uga_edu/EQbdQBSR1DFF
 
 Keep the downloaded "silva_nr_v132_train_set.fa.gz" into the same directory with your fastq files.
 
-# Step 11: Taxonomy assignment
+# Step 13: Taxonomy assignment
 
 Run the following command to assign taxonomy:
 
