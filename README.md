@@ -1,3 +1,4 @@
+# Go through the steps in the INSRUCTION.md file in this repo.
 The instructions are clear and precise. 
 
 You need to download the following:
