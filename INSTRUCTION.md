@@ -24,7 +24,7 @@ fastq_files/
 
 
 
-Step 0: Download the fastq files
+# Step 0: Download the fastq files
 
 Download the entire directory from the following URL:
 
@@ -34,7 +34,7 @@ https://drive.google.com/drive/folders/18kSe9UBJgshaxdN355GLAPBPI8I5IKYn?usp=sha
 
 
 
-Step 1: Library installation and loading
+# Step 1: Library installation and loading
 
 
 ```r
@@ -48,7 +48,7 @@ ok lets confirm that the package version
 packageVersion("dada2")
 ```
 
-Step2: 2. Define File Paths and Sample Names
+# Step 2: Define File Paths and Sample Names
 
 Go to session at the top of your R-studio.
 
@@ -68,3 +68,19 @@ Lets define the path with the following code:
 ```
 path <- "~/Desktop/DESKTOP/CLASSES/6_classes_summer_2025/2_TAing/4_my_files/fastq_files"
 ```
+
+# Step 4: List Forwards and Reverse Reads,  and get the extracted sample name.
+
+We will assign F and R reads with the following code:
+
+```r
+fnFs <- sort(list.files(path, pattern="_R1_001.fastq.gz", full.names=TRUE))
+fnRs <- sort(list.files(path, pattern="_R2_001.fastq.gz", full.names=TRUE))
+```
+And, lets make the sample names as an R object using the following code: 
+
+```r
+sample.names <- sapply(strsplit(basename(fnFs), "_"), `[`, 1)
+```
+
+
