@@ -262,4 +262,38 @@ rownames(track) <- sample.names
 print(track)
 ```
 
+# Before going for the Taxonomic assignment download the ref file and species assignment file from the following link:
+
+```
+https://outlookuga-my.sharepoint.com/:u:/g/personal/ul54354_uga_edu/Ebz8WKVuNzVEotFya4vgdfMB0KSX3dCI22v7-qGZDamCwg?e=v2L8NA
+```
+```
+https://outlookuga-my.sharepoint.com/:u:/g/personal/ul54354_uga_edu/EQbdQBSR1DFFp5vlu6xvcSIBsyKpSCASOODG2plTmjnNbg?e=r0fdsa
+```
+
+Keep the downloaded "silva_nr_v132_train_set.fa.gz" into the same directory with your fastq files.
+
+# Step 11: Taxonomy assignment
+
+Run the following command to assign taxonomy:
+
+```r
+taxa <- assignTaxonomy(seqtab_nochim,
+                       "silva_nr_v132_train_set.fa.gz",
+                       multithread=TRUE)
+```
+
+Lets look at the few assigned sequences using the following command:
+
+```
+head(taxa)
+```
+
+Lets assign species to the sequences:
+
+```
+taxa <- addSpecies(taxa, "silva_species_assignment_v132.fa.gz")
+```
+
+
 
