@@ -295,5 +295,11 @@ Lets assign species to the sequences:
 taxa <- addSpecies(taxa, "silva_species_assignment_v132.fa.gz")
 ```
 
+Now, lets look as the Taxonomic Assignment. Run the following code:
 
+```r
+taxa.print <- taxa 
+rownames(taxa.print) <- NULL
+head(taxa.print)
+```
 
