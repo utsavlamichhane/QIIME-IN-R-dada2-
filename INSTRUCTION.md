@@ -28,6 +28,12 @@ fastq_files/
 
 Download the entire directory from the following URL:
 
+From one drive:
+```
+https://outlookuga-my.sharepoint.com/:f:/g/personal/ul54354_uga_edu/EjbLTEqvkRVOj4qYO5WFJWwBbCXy_aJDvEtLUZz3s3zUeQ?e=FcuogT
+```
+Or from google drive: 
+
 ```
 https://drive.google.com/drive/folders/18kSe9UBJgshaxdN355GLAPBPI8I5IKYn?usp=sharing
 ```
