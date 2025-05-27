@@ -2,7 +2,9 @@
 
 Here I will guide you step by step to run dada2 command in your system using R (preferably R studio). 
 
-You will learn how to:
+We can do many things in R for sequence data but today we will use it to see few things. 
+
+We will learn how to:
 
 1. Inspect and filter raw reads  
 2. Learn error rates  
@@ -10,7 +12,7 @@ You will learn how to:
 4. Merge paired reads  
 5. Build a sequence table and remove chimeras  
 6. Track reads through the pipeline  
-7. (Optional) Assign taxonomy
+7. Assign taxonomy
 
 All example FASTQ files live in a folder called `fastq_files/`. We’ll use three samples (6 FASTQ files total):
 
@@ -303,3 +305,6 @@ rownames(taxa.print) <- NULL
 head(taxa.print)
 ```
 
+
+
+# Thank you
