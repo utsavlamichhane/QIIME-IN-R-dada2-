@@ -238,13 +238,28 @@ To create the sequence table as an R object run the following code:
 
 ```r
 seqtab <- makeSequenceTable(mergers)
-dim(seqtab)  # samples × variants
+dim(seqtab)  
 
 seqtab_nochim <- removeBimeraDenovo(seqtab, method="consensus",
                                     multithread=TRUE, verbose=TRUE)
 ```
 
 
+# Step 10: Track our pipeline
 
+ok, we have been playing a lot with the pipelines lets keep track for our record or for "reviewer 2".
+
+For the tack of the reads in our pipeline run the following code:
+
+```r
+getN <- function(x) sum(getUniques(x))
+track <- cbind(out,
+               sapply(dadaFs, getN),
+               sapply(mergers, getN),
+               rowSums(seqtab_nochim))
+colnames(track) <- c("input", "filtered", "denoised", "merged", "nonchim")
+rownames(track) <- sample.names
+print(track)
+```
 
 
