@@ -77,11 +77,7 @@ Then you will see something like the following in your console:
 ```
 That is your path.
 
-Ok lets see your file path with the following commad:
 
-```
-list.files(path)
-```
 
 Lets define the path with the following code:
 
