@@ -90,7 +90,7 @@ Ok lets see your file path with the following commad:
 ```
 list.files(path)
 ```
-You should see the fastq fiels with the full name and extension. 
+You should see the fastq files with the full name and extension. 
 
 # Step 4: List Forwards and Reverse Reads,  and get the extracted sample name.
 
