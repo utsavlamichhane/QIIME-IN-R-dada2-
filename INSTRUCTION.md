@@ -50,6 +50,13 @@ https://drive.google.com/drive/folders/18kSe9UBJgshaxdN355GLAPBPI8I5IKYn?usp=sha
 
 # Step 1: Library installation and loading
 
+If you dont have biocmanager in your R 
+Install it first by using the following command
+
+```r
+install.packages("Biocmanager")
+```
+
 
 ```r
 BiocManager::install("dada2", force = TRUE)
