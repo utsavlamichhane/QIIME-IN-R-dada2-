@@ -85,6 +85,7 @@ Then you will see something like the following in your console:
 That is your path.
 
 
+# step 3: assign path
 
 Lets define the path with the following code:
 
