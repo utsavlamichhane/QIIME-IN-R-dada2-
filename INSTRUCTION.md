@@ -54,7 +54,7 @@ If you dont have biocmanager in your R
 Install it first by using the following command
 
 ```r
-install.packages("Biocmanager")
+install.packages("BiocManager")
 ```
 
 
